@@ -6,7 +6,7 @@ import lombok.Setter;
 /**
  * @author 18296
  * @date 2019-03-19
- * @description
+ * @description 店家描述
  */
 @Getter
 @Setter
