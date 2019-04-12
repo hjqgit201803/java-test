@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjq.web.demo.dao.OrderInfoMapper">
+  <resultMap id="BaseResultMap" type="com.hjq.web.demo.pojo.model.OrderInfo">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="order_no" jdbcType="BIGINT" property="orderNo" />
+    <result column="order_time" jdbcType="BIGINT" property="orderTime" />
+    <result column="ought_pay" jdbcType="DECIMAL" property="oughtPay" />
+    <result column="actual_pay" jdbcType="DECIMAL" property="actualPay" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="user_phone" jdbcType="VARCHAR" property="userPhone" />
+    <result column="use_coupons" jdbcType="SMALLINT" property="useCoupons" />
+    <result column="coupons_content" jdbcType="VARCHAR" property="couponsContent" />
+    <result column="pay_type" jdbcType="SMALLINT" property="payType" />
+    <result column="order_status" jdbcType="INTEGER" property="orderStatus" />
+    <result column="shipping_addr" jdbcType="VARCHAR" property="shippingAddr" />
+    <result column="create_time" jdbcType="BIGINT" property="createTime" />
+    <result column="update_user_id" jdbcType="INTEGER" property="updateUserId" />
+    <result column="update_time" jdbcType="BIGINT" property="updateTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, order_no, order_time, ought_pay, actual_pay, user_id, user_phone, use_coupons, 
+    coupons_content, pay_type, order_status, shipping_addr, create_time, update_user_id, 
+    update_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from order_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hjq.web.demo.pojo.model.OrderInfo">
+    insert into order_info (id, order_no, order_time, 
+      ought_pay, actual_pay, user_id, 
+      user_phone, use_coupons, coupons_content, 
+      pay_type, order_status, shipping_addr, 
+      create_time, update_user_id, update_time
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderNo,jdbcType=BIGINT}, #{orderTime,jdbcType=BIGINT}, 
+      #{oughtPay,jdbcType=DECIMAL}, #{actualPay,jdbcType=DECIMAL}, #{userId,jdbcType=INTEGER}, 
+      #{userPhone,jdbcType=VARCHAR}, #{useCoupons,jdbcType=SMALLINT}, #{couponsContent,jdbcType=VARCHAR}, 
+      #{payType,jdbcType=SMALLINT}, #{orderStatus,jdbcType=INTEGER}, #{shippingAddr,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT}, #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=BIGINT}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.hjq.web.demo.pojo.model.OrderInfo">
+    insert into order_info
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="orderNo != null">
+        order_no,
+      </if>
+      <if test="orderTime != null">
+        order_time,
+      </if>
+      <if test="oughtPay != null">
+        ought_pay,
+      </if>
+      <if test="actualPay != null">
+        actual_pay,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="userPhone != null">
+        user_phone,
+      </if>
+      <if test="useCoupons != null">
+        use_coupons,
+      </if>
+      <if test="couponsContent != null">
+        coupons_content,
+      </if>
+      <if test="payType != null">
+        pay_type,
+      </if>
+      <if test="orderStatus != null">
+        order_status,
+      </if>
+      <if test="shippingAddr != null">
+        shipping_addr,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updateUserId != null">
+        update_user_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderNo != null">
+        #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="orderTime != null">
+        #{orderTime,jdbcType=BIGINT},
+      </if>
+      <if test="oughtPay != null">
+        #{oughtPay,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPay != null">
+        #{actualPay,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="useCoupons != null">
+        #{useCoupons,jdbcType=SMALLINT},
+      </if>
+      <if test="couponsContent != null">
+        #{couponsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderStatus != null">
+        #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shippingAddr != null">
+        #{shippingAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.hjq.web.demo.pojo.model.OrderInfo">
+    update order_info
+    <set>
+      <if test="orderNo != null">
+        order_no = #{orderNo,jdbcType=BIGINT},
+      </if>
+      <if test="orderTime != null">
+        order_time = #{orderTime,jdbcType=BIGINT},
+      </if>
+      <if test="oughtPay != null">
+        ought_pay = #{oughtPay,jdbcType=DECIMAL},
+      </if>
+      <if test="actualPay != null">
+        actual_pay = #{actualPay,jdbcType=DECIMAL},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="userPhone != null">
+        user_phone = #{userPhone,jdbcType=VARCHAR},
+      </if>
+      <if test="useCoupons != null">
+        use_coupons = #{useCoupons,jdbcType=SMALLINT},
+      </if>
+      <if test="couponsContent != null">
+        coupons_content = #{couponsContent,jdbcType=VARCHAR},
+      </if>
+      <if test="payType != null">
+        pay_type = #{payType,jdbcType=SMALLINT},
+      </if>
+      <if test="orderStatus != null">
+        order_status = #{orderStatus,jdbcType=INTEGER},
+      </if>
+      <if test="shippingAddr != null">
+        shipping_addr = #{shippingAddr,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="updateUserId != null">
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.hjq.web.demo.pojo.model.OrderInfo">
+    update order_info
+    set order_no = #{orderNo,jdbcType=BIGINT},
+      order_time = #{orderTime,jdbcType=BIGINT},
+      ought_pay = #{oughtPay,jdbcType=DECIMAL},
+      actual_pay = #{actualPay,jdbcType=DECIMAL},
+      user_id = #{userId,jdbcType=INTEGER},
+      user_phone = #{userPhone,jdbcType=VARCHAR},
+      use_coupons = #{useCoupons,jdbcType=SMALLINT},
+      coupons_content = #{couponsContent,jdbcType=VARCHAR},
+      pay_type = #{payType,jdbcType=SMALLINT},
+      order_status = #{orderStatus,jdbcType=INTEGER},
+      shipping_addr = #{shippingAddr,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      update_user_id = #{updateUserId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjq.web.demo.dao.GoodInfoMapper">
+    <resultMap id="BaseResultMap" type="com.hjq.web.demo.pojo.model.GoodInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="good_name" jdbcType="VARCHAR" property="goodName"/>
+        <result column="good_url" jdbcType="VARCHAR" property="goodUrl"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="shop_id" jdbcType="INTEGER" property="shopId"/>
+        <result column="shop_name" jdbcType="VARCHAR" property="shopName"/>
+        <result column="lightspot" jdbcType="VARCHAR" property="lightspot"/>
+        <result column="has_sell_num" jdbcType="INTEGER" property="hasSellNum"/>
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, good_name, good_url, price, shop_id, shop_name, lightspot, has_sell_num, update_user_id, 
+    update_time
+  </sql>
+
+    <!--分页查询商品-->
+    <select id="listGoodsOfPage" resultMap="BaseResultMap">
+         select <include refid="Base_Column_List"/>
+         from good_info
+         order by update_time desc
+    </select>
+    <!--商品详情-->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from good_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <!--删除商品-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from good_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+    <!--添加商品-->
+    <insert id="insert" parameterType="com.hjq.web.demo.pojo.model.GoodInfo">
+    insert into good_info (id, good_name, good_url, 
+      price, shop_id, shop_name, 
+      lightspot, has_sell_num, update_user_id, 
+      update_time)
+    values (#{id,jdbcType=INTEGER}, #{goodName,jdbcType=VARCHAR}, #{goodUrl,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DECIMAL}, #{shopId,jdbcType=INTEGER}, #{shopName,jdbcType=VARCHAR}, 
+      #{lightspot,jdbcType=VARCHAR}, #{hasSellNum,jdbcType=INTEGER}, #{updateUserId,jdbcType=INTEGER}, 
+      #{updateTime,jdbcType=BIGINT})
+  </insert>
+
+    <insert id="insertSelective" parameterType="com.hjq.web.demo.pojo.model.GoodInfo">
+        insert into good_info
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="goodName != null">
+                good_name,
+            </if>
+            <if test="goodUrl != null">
+                good_url,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="shopId != null">
+                shop_id,
+            </if>
+            <if test="shopName != null">
+                shop_name,
+            </if>
+            <if test="lightspot != null">
+                lightspot,
+            </if>
+            <if test="hasSellNum != null">
+                has_sell_num,
+            </if>
+            <if test="updateUserId != null">
+                update_user_id,
+            </if>
+            <if test="updateTime != null">
+                update_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="goodName != null">
+                #{goodName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodUrl != null">
+                #{goodUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="shopId != null">
+                #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="lightspot != null">
+                #{lightspot,jdbcType=VARCHAR},
+            </if>
+            <if test="hasSellNum != null">
+                #{hasSellNum,jdbcType=INTEGER},
+            </if>
+            <if test="updateUserId != null">
+                #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                #{updateTime,jdbcType=BIGINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.hjq.web.demo.pojo.model.GoodInfo">
+        update good_info
+        <set>
+            <if test="goodName != null">
+                good_name = #{goodName,jdbcType=VARCHAR},
+            </if>
+            <if test="goodUrl != null">
+                good_url = #{goodUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="price != null">
+                price = #{price,jdbcType=DECIMAL},
+            </if>
+            <if test="shopId != null">
+                shop_id = #{shopId,jdbcType=INTEGER},
+            </if>
+            <if test="shopName != null">
+                shop_name = #{shopName,jdbcType=VARCHAR},
+            </if>
+            <if test="lightspot != null">
+                lightspot = #{lightspot,jdbcType=VARCHAR},
+            </if>
+            <if test="hasSellNum != null">
+                has_sell_num = #{hasSellNum,jdbcType=INTEGER},
+            </if>
+            <if test="updateUserId != null">
+                update_user_id = #{updateUserId,jdbcType=INTEGER},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=BIGINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.hjq.web.demo.pojo.model.GoodInfo">
+        update good_info
+        set good_name = #{goodName,jdbcType=VARCHAR},
+        good_url = #{goodUrl,jdbcType=VARCHAR},
+        price = #{price,jdbcType=DECIMAL},
+        shop_id = #{shopId,jdbcType=INTEGER},
+        shop_name = #{shopName,jdbcType=VARCHAR},
+        lightspot = #{lightspot,jdbcType=VARCHAR},
+        has_sell_num = #{hasSellNum,jdbcType=INTEGER},
+        update_user_id = #{updateUserId,jdbcType=INTEGER},
+        update_time = #{updateTime,jdbcType=BIGINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+</mapper>

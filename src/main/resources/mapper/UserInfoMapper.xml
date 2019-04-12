@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hjq.web.demo.dao.UserInfoMapper">
+    <resultMap id="BaseResultMap" type="com.hjq.web.demo.pojo.model.UserInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="login_id" jdbcType="VARCHAR" property="loginId"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="sex" jdbcType="SMALLINT" property="sex"/>
+        <result column="address" jdbcType="VARCHAR" property="address"/>
+        <result column="last_login_time" jdbcType="BIGINT" property="lastLoginTime"/>
+        <result column="update_user_id" jdbcType="INTEGER" property="updateUserId"/>
+        <result column="update_time" jdbcType="BIGINT" property="updateTime"/>
+        <result column="valid" jdbcType="SMALLINT" property="valid"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, login_id,password,user_name, phone, sex, address, last_login_time, update_user_id, update_time,
+        valid
+    </sql>
+
+
+    <!--查询用户（登录）-->
+    <select id="findLoginUserInfo" parameterType="com.hjq.web.demo.pojo.dto.UserQueryDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where login_id = #{loginId} AND password=#{password} and valid = 1
+    </select>
+
+
+    <!--查询用户（其他参数）-->
+    <select id="findUserInfoBySomeParam" parameterType="com.hjq.web.demo.pojo.dto.UserQueryDTO" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        <where>
+            <if test="loginId!=null">
+                and login_id = #{loginId}
+            </if>
+            <if test="phone!=null">
+                and phone=#{phone}
+            </if>
+        </where>
+    </select>
+
+
+    <!--id查询-->
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from user_info
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <!--删除-->
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from user_info
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--保存-->
+    <insert id="insert" parameterType="com.hjq.web.demo.pojo.model.UserInfo" useGeneratedKeys="true" keyProperty="id">
+        insert into user_info (login_id, user_name,
+          phone, sex, address,
+          last_login_time, update_user_id, update_time,valid)
+        values (#{loginId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR},
+          #{phone,jdbcType=VARCHAR}, #{sex,jdbcType=SMALLINT}, #{address,jdbcType=VARCHAR},
+          #{lastLoginTime,jdbcType=BIGINT}, #{updateUserId,jdbcType=INTEGER}, #{updateTime,jdbcType=BIGINT},
+          #{valid,jdbcType=SMALLINT})
+  </insert>
+
+
+</mapper>
