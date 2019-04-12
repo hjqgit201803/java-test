@@ -14,6 +14,9 @@ import com.hjq.web.demo.service.UserInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  * @Description:
  * @Author hjq
@@ -39,6 +42,11 @@ public class UserInfoServiceImpl implements UserInfoService {
         Validation.notNull(userInfo.getPhone(), ResultCode.PARAMS_ERROR);
         Validation.notNull(userInfo.getPassword(), ResultCode.PARAMS_ERROR);
         Validation.notNull(userInfo.getConfirmPassword(), ResultCode.PARAMS_ERROR);
+
+
+
+        Map<String,String> map = new HashMap<String,String>();
+
 
         long nowTime = System.currentTimeMillis();
         //校验
